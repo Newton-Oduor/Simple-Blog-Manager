@@ -8,11 +8,12 @@ const BASE_URL = 'http://localhost:3000/posts'
 function main() {
     displayBlogPosts(); // Display all posts
     addNewBlogPostListener(); // Add and display new posts
+    loadFirstPostDetails(); // Displays first post as soonas page loads
 }
 
 // Function to fetch blog posts from the server and display their titles on the page.
 function displayBlogPosts() {
-    fetch(BASE_URL) // Make GET request from the server (http://localhost:3000/blogPosts)
+    fetch(BASE_URL) // Make GET request from the server (http://localhost:3000/posts)
     .then(response => response.json()) // Convert response to JSON
     .then(posts => {
             const postList = document.getElementById('post-list'); // Get the post list container (where the post titles will be displayed &)
@@ -92,4 +93,15 @@ function renderPostToList(post) {
     postDiv.addEventListener('click', showPostDetails); // Attach click listener
 
     postList.prepend(postDiv);
+}
+
+// Show details of the first post when the page loads
+function loadFirstPostDetails() {
+    fetch(BASE_URL)
+        .then(response => response.json())
+        .then(posts => {
+            if (posts.length > 0) {
+                displayPostContent(posts[0].id);  // Show first post's details
+            }
+        });
 }

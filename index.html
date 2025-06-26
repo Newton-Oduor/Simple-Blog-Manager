@@ -14,6 +14,17 @@
     <!-- Section for details of a selected post -->
     <div id="post-detail"></div>
 
+    <!-- Form for editing a post -->
+<form id="edit-post-form" class="hidden">
+    <h3>Edit Post</h3>
+    <label>Title:</label>
+    <input type="text" id="edit-title" required>
+    <label>Content:</label>
+    <textarea id="edit-content" rows="4" required></textarea>
+    <button type="submit">Save Changes</button>
+    <button type="button" id="cancel-edit">Cancel</button>
+</form>
+
     <!-- Form to add a new post -->
     <form id="new-blog-post-form">
         <h2>Add New Post</h2>
