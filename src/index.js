@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', main);
 
 // Set base API url for communication with the server
-const BASE_URL = 'http://localhost:3000/blogPosts'
+const BASE_URL = 'http://localhost:3000/posts'
 
 // App entry point - main function
 function main() {
