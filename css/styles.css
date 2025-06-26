@@ -20,7 +20,7 @@ h1, h2, h3 {
 }
 
 #post-list div.post-title:hover {
-    transform: scale(1.1); /* Reduced magnify to 1.1x */
+    transform: scale(1.1); 
     background-color: #f0f0f0;
 }
 
@@ -89,7 +89,6 @@ button#delete-btn {
     cursor: pointer;
 }
 
-/* Optional: Small hover effect for buttons */
 button:hover, form button:hover {
     opacity: 0.9;
 }
