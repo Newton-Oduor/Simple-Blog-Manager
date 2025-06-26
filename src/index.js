@@ -54,8 +54,54 @@ function displayPostContent(id) {
                 <img src="${post.image}" alt="${post.title}" width="150">
                 <p>${post.content}</p>
                 <p><strong>Author:</strong> ${post.author}</p>
+                <button id="edit-btn">Edit</button>
+                <button id="delete-btn">Delete</button>
             `;
+
+            // Edit & delete button listener
+            document.getElementById('edit-btn').addEventListener('click', () => showEditForm(post));
+
+            document.getElementById('delete-btn').addEventListener('click', () => deletePost(post.id));
         });
+}
+
+// Show the edit form and fill it with existing post data
+function showEditForm(post) {
+    const form = document.getElementById('edit-post-form');
+    form.classList.remove('hidden');
+
+    document.getElementById('edit-title').value = post.title;
+    document.getElementById('edit-content').value = post.content;
+
+    form.onsubmit = function(event) {
+        event.preventDefault();
+        const updatedPost = {
+            title: document.getElementById('edit-title').value,
+            content: document.getElementById('edit-content').value
+        };
+        updatePost(post.id, updatedPost);
+        form.classList.add('hidden');
+    };
+
+    document.getElementById('cancel-edit').onclick = function() {
+        form.classList.add('hidden');
+    };
+}
+
+// PATCH request to server to update post
+function updatePost(id, updatedData) {
+    fetch(`${BASE_URL}/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedData)
+    })
+    .then(response => response.json())
+    .then(() => {
+        displayBlogPosts();
+        displayPostContent(id);
+    });
 }
 
 // Set up listener for new post form submission
@@ -73,11 +119,20 @@ function addNewBlogPostListener() {
             image: 'https://c7.alamy.com/comp/RGH3WX/new-blog-post-sign-on-a-wooden-desk-with-a-stylish-living-room-on-a-blurry-background-RGH3WX.jpg' // image link for new posts
         };
 
-        // Add new post to the DOM
-        renderPostToList(newPost);
+    // Save new post to server
+    fetch(BASE_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newPost)
+    })
+    .then(response => response.json())
+    .then(savedPost => {
+        renderPostToList(savedPost);  
+    });
 
-        // Clear form after submission
-        form.reset();
+    form.reset();
     });
 }
 
@@ -104,4 +159,15 @@ function loadFirstPostDetails() {
                 displayPostContent(posts[0].id);  // Show first post's details
             }
         });
+}
+
+// Delete feature
+function deletePost(id) {
+    fetch(`${BASE_URL}/${id}`, {
+        method: 'DELETE'
+    })
+    .then(() => {
+        displayBlogPosts();
+        document.getElementById('post-detail').innerHTML = '<p>Post deleted.</p>';
+    });
 }

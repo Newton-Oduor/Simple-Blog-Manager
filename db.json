@@ -1,18 +1,25 @@
 {
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Blog Post One",
       "image": "https://cariadmarketing.com/wp-content/uploads/2022/06/How-to-write-an-amazing-blog-post-768x513.jpg.webp",
       "content": "Content of the first post.",
       "author": "Newts"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Blog Post Two",
       "image": "https://cariadmarketing.com/wp-content/uploads/2022/06/How-to-write-an-amazing-blog-post-768x513.jpg.webp",
       "content": "Content of the second post.",
       "author": "Newts O"
+    },
+    {
+      "id": "df1c",
+      "title": "Blog Post After",
+      "author": "Oduor",
+      "content": "Long one this one. Crazy day!",
+      "image": "https://c7.alamy.com/comp/RGH3WX/new-blog-post-sign-on-a-wooden-desk-with-a-stylish-living-room-on-a-blurry-background-RGH3WX.jpg"
     }
   ]
 }
